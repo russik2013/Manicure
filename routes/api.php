@@ -23,6 +23,25 @@ Route::middleware('jwt.auth')->get('users', function(Request $request) {
     return auth()->user();
 });
 
-Route::group(["middleware" => "jwt.auth"], function(){
-    Route::post("auth/logout", "APILoginController@logout");
+Route::post('userInfo', 'UserApiController@index');
+Route::post('setRating', 'UserApiController@setRating');
+
+Route::group(['prefix' => 'review'], function(){
+
+
+    Route::post('all', 'UserApiController@allReviews');
+
 });
+
+//Route::group(["middleware" => "jwt.auth"], function(){
+//    Route::post("auth/logout", "APILoginController@logout");
+//
+//
+//
+//    Route::group(['prefix' => 'area'], function (){
+//
+//        Route::post('/', 'UserApiController@areas');
+//
+//    });
+//
+//});

@@ -32,14 +32,64 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserRole::class);
     }
+    public function areas()
+    {
+        return $this->hasMany(UserArea::class);
+    }
 
     public function setAgeAttribute($value)
     {
         $this->attributes['age'] = (Carbon::now())->diffInMonths($value)/12;
     }
 
-    public function serPasswordAttribute($value)
+    public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function rating()
+    {
+        return $this->hasMany(UserRating::class);
+    }
+
+    public function avgRating()
+    {
+        return $this->rating()
+            ->selectRaw('avg(value) as aggregate, user_id')
+            ->groupBy('user_id');
+    }
+
+    public function getAvgRatingAttribute()
+    {
+        if ( ! array_key_exists('avgRating', $this->relations)) {
+            $this->load('avgRating');
+        }
+
+        $relation = $this->getRelation('avgRating')->first();
+
+        return ($relation) ? $relation->aggregate : null;
+    }
+
+    public function getRating()
+    {
+        return $this->morphMany(UserRating::class, 'appraisers');
+    }
+
+    public function getReview()
+    {
+        return $this->hasMany(UserReview::class, 'client_id');
+    }
+
+    public function userReviews()
+    {
+        //return $this->belongsToMany(UserReview::class,'user_ratings')->using(UserRating::class);
+
+        return $this->hasMany(UserRating::class)
+            ->where('appraisers_type', '=', 'App\UserReview');
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->firstName} {$this->lastName}";
     }
 }
