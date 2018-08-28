@@ -17,7 +17,6 @@ class UserReviewTransformer extends Transformer
     {
         $returnMass = [];
         foreach ($userReviews as $review){
-
             $returnMass[] = [
                 "value" => $review->getRating ? $review->getRating->value : "no rating",
                 "comment" => $review->comment ?: "no comments",
@@ -25,7 +24,6 @@ class UserReviewTransformer extends Transformer
                     ? $review->getRating->recipient->fullName
                     : "no author",
             ];
-
         }
         return $returnMass;
     }

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserReview extends Model
 {
+    protected $table = "user_reviews";
+
     protected $fillable = ['client_id', 'comment'];
 
     public function getRating()

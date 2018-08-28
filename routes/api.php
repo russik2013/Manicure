@@ -27,9 +27,12 @@ Route::post('userInfo', 'UserApiController@index');
 Route::post('setRating', 'UserApiController@setRating');
 
 Route::group(['prefix' => 'review'], function(){
-
-
     Route::post('all', 'UserApiController@allReviews');
+    Route::post('master', 'UserApiController@allReviewOneUser');
+    Route::post('store', 'UserApiController@reviewStore');
+    Route::post('edit/{id?}', 'UserApiController@reviewEdit');
+    Route::post('update', 'UserApiController@reviewUpdate');
+    Route::post('delete', 'UserApiController@reviewDelete');
 
 });
 
