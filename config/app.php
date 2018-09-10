@@ -161,6 +161,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class,
+
     ],
 
     /*
@@ -212,6 +214,7 @@ return [
 
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Clockwork' => Clockwork\Support\Laravel\Facade::class,
 
     ],
 

@@ -13,7 +13,6 @@ class ReviewTransformer extends Transformer
 {
     public function transform($review)
     {
-        dd('russik say stop');
         return [
             "comment" => $review ? $review->comment : "no comment",
             "value" => ($review && $review->getRating) ? $review->getRating->value : "no value",

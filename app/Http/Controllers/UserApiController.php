@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\Http\Requests\RatingRequest;
 use App\Http\Requests\ReviewRequest;
+use App\Http\Requests\SubscriptionRequest;
+use App\Laws;
+use App\Subscriptions;
 use App\Transformers\User\MasterReviewTransformer;
 use App\Transformers\User\UserReviewTransformer;
 use App\Transformers\User\UserTransformer;
@@ -126,4 +129,7 @@ class UserApiController extends Controller
         }
         else return "it is no your comment";
     }
+
+
+
 }
